@@ -20,4 +20,14 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://spitfire1337.github.io/automation-edge-landing/blog/5-automation-tips-save-10-hours-a-week.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://spitfire1337.github.io/automation-edge-landing/blog/automate-repetitive-tasks-without-hiring-a-developer.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
