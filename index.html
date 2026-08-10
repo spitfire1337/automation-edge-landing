@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Automation Edge — AI Automation Playbooks for Small Business</title>
+<meta name="description" content="Twice-weekly, no-jargon automation playbooks that help small business owners save hours using simple AI tools. Free tips, paid deep-dives.">
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; margin:0; background:#0f1115; color:#eef1f5; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 48px 24px; }
+  h1 { font-size: 2.4rem; line-height:1.15; margin-bottom: 12px; }
+  .tag { color:#9aa4b2; font-size:1.15rem; margin-bottom:32px; }
+  .card { background:#171a21; border:1px solid #2a2f3a; border-radius:14px; padding:28px; margin-bottom:24px; }
+  ul { padding-left: 20px; }
+  li { margin-bottom:10px; color:#d3d8e0; }
+  form { display:flex; gap:10px; flex-wrap:wrap; margin-top:18px; }
+  input[type=email] { flex:1; min-width:220px; padding:14px 16px; border-radius:8px; border:1px solid #333a46; background:#0f1115; color:#eef1f5; font-size:1rem; }
+  button { padding:14px 22px; border-radius:8px; border:none; background:#4f8cff; color:white; font-weight:600; font-size:1rem; cursor:pointer; }
+  button:hover { background:#3d78e6; }
+  .note { font-size:0.85rem; color:#7a828f; margin-top:10px; }
+  .price { font-size:1.6rem; font-weight:700; color:#4f8cff; }
+  #status { margin-top:12px; font-size:0.95rem; }
+  footer { text-align:center; color:#5b6270; font-size:0.8rem; margin-top:40px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Stop guessing. Start automating.</h1>
+  <p class="tag">Twice-weekly, plain-English AI automation playbooks for small business owners — no coding, no fluff.</p>
+
+  <div class="card">
+    <h2>Free weekly tip</h2>
+    <p>One practical automation idea every week, straight to your inbox. No credit card needed.</p>
+    <form id="signup-form">
+      <input type="email" id="email" name="email" placeholder="you@yourbusiness.com" required>
+      <button type="submit">Get free tips</button>
+    </form>
+    <div id="status"></div>
+    <p class="note">We never share your email. Unsubscribe anytime.</p>
+  </div>
+
+  <div class="card">
+    <h2>Go deeper — <span class="price">$9/mo</span></h2>
+    <ul>
+      <li>Full step-by-step playbooks, twice a week (tools, prompts, screenshots)</li>
+      <li>Ready-to-copy AI prompt packs for your industry</li>
+      <li>One "automate this for me" request per month</li>
+    </ul>
+    <p class="note">Launching soon — free subscribers get first access + founder pricing.</p>
+  </div>
+
+  <footer>The Automation Edge — a small, independent newsletter.</footer>
+</div>
+
+<script>
+const SUPABASE_URL = "https://gdqxktignefqfpanidob.supabase.co/rest/v1/subscribers";
+const SUPABASE_ANON_KEY = "sb_publishable_hmxRQdEMamY2hzqD1ZQZFw_5smTvW9a";
+
+document.getElementById('signup-form').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const email = document.getElementById('email').value.trim();
+  const statusEl = document.getElementById('status');
+  statusEl.textContent = 'Submitting...';
+  try {
+    const res = await fetch(SUPABASE_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({ email: email, tier: 'free' })
+    });
+    if (res.ok) {
+      statusEl.textContent = "You're in! Check your inbox soon for your first automation tip.";
+      document.getElementById('signup-form').reset();
+    } else {
+      const txt = await res.text();
+      if (txt.includes('duplicate') || res.status === 409) {
+        statusEl.textContent = "You're already on the list!";
+      } else {
+        statusEl.textContent = 'Something went wrong. Please try again in a moment.';
+      }
+    }
+  } catch(err) {
+    statusEl.textContent = 'Network error. Please try again.';
+  }
+});
+</script>
+</body>
+</html>
