@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://spitfire1337.github.io/automation-edge-landing/sitemap.xml
