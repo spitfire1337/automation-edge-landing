@@ -5,29 +5,211 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Automation Edge — AI Automation Playbooks for Small Business</title>
 <meta name="description" content="Twice-weekly, no-jargon automation playbooks that help small business owners save hours using simple AI tools. Free tips, paid deep-dives.">
+
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; margin:0; background:#0f1115; color:#eef1f5; }
-  .wrap { max-width: 720px; margin: 0 auto; padding: 48px 24px; }
-  h1 { font-size: 2.4rem; line-height:1.15; margin-bottom: 12px; }
-  .tag { color:#9aa4b2; font-size:1.15rem; margin-bottom:32px; }
-  .card { background:#171a21; border:1px solid #2a2f3a; border-radius:14px; padding:28px; margin-bottom:24px; }
-  ul { padding-left: 20px; }
-  li { margin-bottom:10px; color:#d3d8e0; }
-  form { display:flex; gap:10px; flex-wrap:wrap; margin-top:18px; }
-  input[type=email] { flex:1; min-width:220px; padding:14px 16px; border-radius:8px; border:1px solid #333a46; background:#0f1115; color:#eef1f5; font-size:1rem; }
-  button { padding:14px 22px; border-radius:8px; border:none; background:#4f8cff; color:white; font-weight:600; font-size:1rem; cursor:pointer; }
-  button:hover { background:#3d78e6; }
-  .note { font-size:0.85rem; color:#7a828f; margin-top:10px; }
-  .price { font-size:1.6rem; font-weight:700; color:#4f8cff; }
-  #status { margin-top:12px; font-size:0.95rem; }
-  footer { text-align:center; color:#5b6270; font-size:0.8rem; margin-top:40px; }
+  :root {
+    --bg: #0f1115;
+    --bg-card: #171a21;
+    --border: #2a2f3a;
+    --text: #eef1f5;
+    --text-muted: #9aa4b2;
+    --text-dim: #7a828f;
+    --accent: #4f8cff;
+    --accent-hover: #3d78e6;
+    --accent-light: #7fb0ff;
+    --radius-lg: 16px;
+    --radius-md: 10px;
+    --shadow: 0 8px 24px rgba(0,0,0,0.35);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .wrap { max-width: 760px; margin: 0 auto; padding: 32px 24px 48px; }
+
+  /* Header / nav */
+  header.site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0 32px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .brand img { display: block; height: 40px; width: auto; }
+  .brand-name { font-weight: 700; font-size: 1.05rem; color: var(--text); }
+  .brand-name span { color: var(--accent); }
+  nav.site-nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-left: 20px;
+    transition: color 0.15s ease;
+  }
+  nav.site-nav a:hover { color: var(--accent); }
+
+  /* Hero */
+  .hero { padding: 24px 0 40px; }
+  h1 { font-size: 2.6rem; line-height: 1.15; margin: 0 0 16px; font-weight: 800; letter-spacing: -0.02em; }
+  .tag { color: var(--text-muted); font-size: 1.2rem; margin: 0 0 28px; max-width: 60ch; }
+  .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-link {
+    display: inline-block;
+    padding: 12px 22px;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: background 0.15s ease, transform 0.1s ease;
+  }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: var(--accent-hover); }
+  .btn-secondary { background: transparent; color: var(--text-muted); border: 1px solid var(--border); }
+  .btn-secondary:hover { color: var(--text); border-color: var(--accent); }
+
+  /* Sections & cards */
+  section { margin-bottom: 28px; }
+  .section-title { font-size: 1.5rem; font-weight: 700; margin: 0 0 14px; }
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow);
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 8px;
+  }
+  .about-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 18px;
+  }
+  .about-item h3 { margin: 0 0 6px; font-size: 1rem; color: var(--accent-light); }
+  .about-item p { margin: 0; color: var(--text-muted); font-size: 0.9rem; }
+
+  ul { padding-left: 20px; margin: 12px 0; }
+  li { margin-bottom: 10px; color: #d3d8e0; }
+
+  form { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+  input[type=email] {
+    flex: 1;
+    min-width: 220px;
+    padding: 14px 16px;
+    border-radius: var(--radius-md);
+    border: 1px solid #333a46;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 1rem;
+    font-family: inherit;
+  }
+  input[type=email]:focus { outline: none; border-color: var(--accent); }
+  button {
+    padding: 14px 22px;
+    border-radius: var(--radius-md);
+    border: none;
+    background: var(--accent);
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s ease;
+  }
+  button:hover { background: var(--accent-hover); }
+
+  .note { font-size: 0.85rem; color: var(--text-dim); margin-top: 10px; }
+  .price { font-size: 1.6rem; font-weight: 700; color: var(--accent); }
+  #status { margin-top: 12px; font-size: 0.95rem; min-height: 1.2em; }
+
+  footer.site-footer {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+  footer.site-footer .footer-brand { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 12px; }
+  footer.site-footer .footer-brand img { height: 22px; width: auto; }
+  footer.site-footer a { color: var(--text-dim); text-decoration: none; }
+  footer.site-footer a:hover { color: var(--accent); }
+  .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 4px; margin-bottom: 10px; }
+  .footer-links .sep { color: #444b58; }
+
+  @media (max-width: 640px) {
+    h1 { font-size: 2rem; }
+    .tag { font-size: 1.05rem; }
+    .about-grid { grid-template-columns: 1fr; }
+    header.site-header { flex-direction: column; align-items: flex-start; }
+    nav.site-nav a { margin-left: 0; margin-right: 16px; }
+  }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <nav style="margin-bottom:24px;"><a href="blog/automation-tips-small-business.html" style="color:#4f8cff; text-decoration:none; margin-right:16px;">Blog</a></nav>
-  <h1>Stop guessing. Start automating.</h1>
-  <p class="tag">Twice-weekly, plain-English AI automation playbooks for small business owners — no coding, no fluff.</p>
+
+  <header class="site-header">
+    <a href="index.html" class="brand">
+      <img src="assets/logo-mark.svg" alt="The Automation Edge logo" width="40" height="40">
+      <span class="brand-name">The Automation<span> Edge</span></span>
+    </a>
+    <nav class="site-nav">
+      <a href="blog/index.html">Blog</a>
+      <a href="#signup">Free Tips</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Stop guessing. Start automating.</h1>
+    <p class="tag">Twice-weekly, plain-English AI automation playbooks for small business owners — no coding, no fluff.</p>
+    <div class="hero-ctas">
+      <a href="#signup" class="btn-link btn-primary">Get free tips</a>
+      <a href="blog/index.html" class="btn-link btn-secondary">Read the blog</a>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2 class="section-title">What we do</h2>
+    <p style="color:var(--text-muted); max-width:65ch;">We help small business owners and solopreneurs cut hours of repetitive work using simple, no-code AI automation — without hiring a developer. Every playbook is tested, practical, and written in plain English.</p>
+    <div class="about-grid">
+      <div class="about-item">
+        <h3>Save hours weekly</h3>
+        <p>Automate invoicing, scheduling, follow-ups and more.</p>
+      </div>
+      <div class="about-item">
+        <h3>No-code tools</h3>
+        <p>Simple AI &amp; automation tools anyone can set up.</p>
+      </div>
+      <div class="about-item">
+        <h3>Real playbooks</h3>
+        <p>Step-by-step guides, not vague theory.</p>
+      </div>
+    </div>
+  </section>
 
   <div class="card" id="signup">
     <h2>Free weekly tip</h2>
@@ -59,11 +241,17 @@
     <p class="note">Founder pricing — one-time support payment via PayPal.</p>
   </div>
 
-  <footer>The Automation Edge — a small, independent newsletter.<br>
-    <a href="blog/automation-tips-small-business.html" style="color:#7a828f;">Blog: Automation Tips for Small Business Owners</a> ·
-    <a href="blog/automate-repetitive-tasks-small-business.html" style="color:#7a828f;">How to Automate Repetitive Tasks</a> ·
-    <a href="blog/5-automation-tips-save-10-hours-a-week.html" style="color:#7a828f;">5 Automation Tips to Save 10 Hours a Week</a> ·
-    <a href="blog/automate-repetitive-tasks-without-hiring-a-developer.html" style="color:#7a828f;">Automate Tasks Without a Developer</a>
+  <footer class="site-footer">
+    <div class="footer-brand">
+      <img src="assets/logo-mark.svg" alt="The Automation Edge logo" width="22" height="22">
+      <span>The Automation Edge — a small, independent newsletter.</span>
+    </div>
+    <div class="footer-links">
+      <a href="blog/automation-tips-small-business.html">Automation Tips for Small Business Owners</a><span class="sep">·</span>
+      <a href="blog/automate-repetitive-tasks-small-business.html">How to Automate Repetitive Tasks</a><span class="sep">·</span>
+      <a href="blog/5-automation-tips-save-10-hours-a-week.html">5 Automation Tips to Save 10 Hours a Week</a><span class="sep">·</span>
+      <a href="blog/automate-repetitive-tasks-without-hiring-a-developer.html">Automate Tasks Without a Developer</a>
+    </div>
   </footer>
 </div>
 
