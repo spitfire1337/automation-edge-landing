@@ -15,6 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/nav.css">
 
 <style>
   :root {
@@ -48,63 +49,7 @@
 
   .wrap { max-width: 760px; margin: 0 auto; padding: 32px 24px 48px; }
 
-  /* Header / nav */
-  header.site-header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 0;
-    flex-wrap: wrap;
-    gap: 12px;
-    background: rgba(15,17,21,0.92);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 24px;
-  }
-  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-  .brand img { display: block; height: 40px; width: auto; filter: drop-shadow(0 1px 3px rgba(0,0,0,0.5)); }
-  .brand-name { font-weight: 700; font-size: 1.05rem; color: var(--text); }
-  .brand-name span { color: var(--accent); }
-  nav.site-nav { display: flex; align-items: center; }
-  nav.site-nav a {
-    color: var(--text-muted);
-    text-decoration: none;
-    font-size: 0.95rem;
-    font-weight: 500;
-    margin-left: 20px;
-    transition: color 0.15s ease;
-  }
-  nav.site-nav a:hover { color: var(--accent); }
-
-  /* Hamburger (mobile) */
-  .nav-toggle {
-    display: none;
-    background: transparent;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    padding: 8px 10px;
-    cursor: pointer;
-  }
-  .nav-toggle span,
-  .nav-toggle span::before,
-  .nav-toggle span::after {
-    display: block;
-    width: 20px;
-    height: 2px;
-    background: var(--text);
-    position: relative;
-    transition: transform 0.2s ease, opacity 0.2s ease;
-  }
-  .nav-toggle span::before,
-  .nav-toggle span::after { content: ""; position: absolute; }
-  .nav-toggle span::before { top: -6px; }
-  .nav-toggle span::after { top: 6px; }
-  .nav-toggle[aria-expanded="true"] span { background: transparent; }
-  .nav-toggle[aria-expanded="true"] span::before { transform: translateY(6px) rotate(45deg); }
-  .nav-toggle[aria-expanded="true"] span::after { transform: translateY(-6px) rotate(-45deg); }
+  /* Header / nav styles shared across the site live in assets/nav.css */
 
   /* Hero */
   .hero { padding: 24px 0 40px; }
@@ -185,20 +130,7 @@
   .price { font-size: 1.6rem; font-weight: 700; color: var(--accent); }
   #status { margin-top: 12px; font-size: 0.95rem; min-height: 1.2em; }
 
-  footer.site-footer {
-    text-align: center;
-    color: var(--text-dim);
-    font-size: 0.8rem;
-    margin-top: 40px;
-    padding-top: 24px;
-    border-top: 1px solid var(--border);
-  }
-  footer.site-footer .footer-brand { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 12px; }
-  footer.site-footer .footer-brand img { height: 22px; width: auto; }
-  footer.site-footer a { color: var(--text-dim); text-decoration: none; }
-  footer.site-footer a:hover { color: var(--accent); }
-  .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 4px; margin-bottom: 10px; }
-  .footer-links .sep { color: #444b58; }
+  /* Footer styles shared across the site live in assets/nav.css */
 
   /* Feature icons */
   .about-item .icon { font-size: 1.6rem; display: block; margin-bottom: 8px; }
@@ -316,22 +248,6 @@
     .about-grid { grid-template-columns: 1fr; }
     .pricing-grid { grid-template-columns: 1fr; }
     .testimonial-grid { grid-template-columns: 1fr; }
-    header.site-header { position: sticky; }
-    .nav-toggle { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; }
-    nav.site-nav {
-      display: none;
-      flex-direction: column;
-      align-items: flex-start;
-      width: 100%;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 8px 16px;
-      margin-top: 12px;
-    }
-    nav.site-nav.open { display: flex; }
-    nav.site-nav a { margin-left: 0; margin-right: 0; padding: 10px 0; width: 100%; border-bottom: 1px solid var(--border); }
-    nav.site-nav a:last-child { border-bottom: none; }
   }
 </style>
 </head>
@@ -347,7 +263,7 @@
       <span></span>
     </button>
     <nav class="site-nav" id="site-nav">
-      <a href="#home">Home</a>
+      <a href="#home" class="active" aria-current="page">Home</a>
       <a href="#features">Features</a>
       <a href="#pricing">Pricing</a>
       <a href="#testimonials">Testimonials</a>
@@ -549,33 +465,18 @@
       <img src="assets/logo-mark.svg?v=2" alt="The Automation Edge logo" width="22" height="22">
       <span>The Automation Edge — a small, independent newsletter.</span>
     </div>
-    <div class="footer-links">
-      <a href="blog/automation-tips-small-business.html">Automation Tips for Small Business Owners</a><span class="sep">·</span>
-      <a href="blog/automate-repetitive-tasks-small-business.html">How to Automate Repetitive Tasks</a><span class="sep">·</span>
-      <a href="blog/5-automation-tips-save-10-hours-a-week.html">5 Automation Tips to Save 10 Hours a Week</a><span class="sep">·</span>
-      <a href="blog/automate-repetitive-tasks-without-hiring-a-developer.html">Automate Tasks Without a Developer</a>
-    </div>
+    <nav class="footer-nav">
+      <a href="#home" class="active" aria-current="page">Home</a>
+      <a href="blog/index.html">Blog</a>
+    </nav>
   </footer>
 </div>
 
+<script src="assets/nav.js" defer></script>
 <script>
 const SUPABASE_URL = "https://gdqxktignefqfpanidob.supabase.co/rest/v1/subscribers";
 const SUPABASE_ANON_KEY = "sb_publishable_hmxRQdEMamY2hzqD1ZQZFw_5smTvW9a";
 
-// Mobile hamburger nav toggle
-const navToggle = document.getElementById('nav-toggle');
-const siteNav = document.getElementById('site-nav');
-navToggle.addEventListener('click', function () {
-  const isOpen = siteNav.classList.toggle('open');
-  navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-});
-// Close mobile menu after tapping a nav link (smooth scroll handled natively via CSS)
-siteNav.querySelectorAll('a').forEach(function (link) {
-  link.addEventListener('click', function () {
-    siteNav.classList.remove('open');
-    navToggle.setAttribute('aria-expanded', 'false');
-  });
-});
 
 // FAQ accordion (pure JS, no dependencies)
 document.querySelectorAll('.faq-item').forEach(function (item) {
