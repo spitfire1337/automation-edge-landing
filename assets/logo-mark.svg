@@ -2,15 +2,15 @@
   <title id="markTitle">The Automation Edge mark</title>
   <defs>
     <linearGradient id="bg-grad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#171a21"/>
-      <stop offset="100%" stop-color="#0f1115"/>
+      <stop offset="0%" stop-color="#242b3a"/>
+      <stop offset="100%" stop-color="#141822"/>
     </linearGradient>
     <linearGradient id="bolt-grad" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#7fb0ff"/>
       <stop offset="100%" stop-color="#4f8cff"/>
     </linearGradient>
   </defs>
-  <rect x="1" y="1" width="62" height="62" rx="16" fill="url(#bg-grad)" stroke="#2a2f3a" stroke-width="1.5"/>
+  <rect x="1" y="1" width="62" height="62" rx="16" fill="url(#bg-grad)" stroke="#4f8cff" stroke-width="2"/>
   <!-- stylized "edge/bolt" mark: an angular arrow built from two triangles, evoking automation + forward motion -->
   <path d="M 27 12 L 40 12 L 27 30 L 36 30 L 22 52 L 26 33 L 17 33 Z" fill="url(#bolt-grad)"/>
 </svg>
