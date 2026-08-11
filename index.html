@@ -133,14 +133,30 @@
   /* Footer styles shared across the site live in assets/nav.css */
 
   /* Feature icons */
-  .about-item .icon { font-size: 1.6rem; display: block; margin-bottom: 8px; }
+  .about-item .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    margin-bottom: 10px;
+    color: var(--accent-light);
+  }
+  .about-item .icon svg { width: 100%; height: 100%; }
+
+  /* Feature card row: keep equal heights regardless of text length */
+  .about-grid { align-items: stretch; }
+  .about-item { display: flex; flex-direction: column; align-items: stretch; height: 100%; }
+  .about-item p { flex: 1; margin: 0; }
 
   /* Pricing */
+  #pricing { padding-bottom: 12px; }
   .pricing-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
     margin-top: 8px;
+    align-items: stretch;
   }
   .pricing-card {
     background: var(--bg-card);
@@ -150,6 +166,7 @@
     text-align: center;
     display: flex;
     flex-direction: column;
+    height: 100%;
   }
   .pricing-card.featured { border-color: var(--accent); box-shadow: var(--shadow); }
   .pricing-card h3 { margin: 0 0 6px; font-size: 1.1rem; }
@@ -169,6 +186,21 @@
   .pricing-card .price small { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; }
   .pricing-card ul { text-align: left; flex: 1; }
   .pricing-card li { font-size: 0.9rem; }
+  .pricing-card .pay-form { margin-top: 16px; }
+  .pricing-card .pay-form button {
+    width: 100%;
+    padding: 12px 18px;
+    font-size: 0.95rem;
+  }
+  .pricing-card .founder-note { font-size: 0.8rem; color: var(--text-dim); margin-top: 10px; text-align: center; }
+
+  /* Section divider between Pricing and FAQ so they don't visually blend */
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 48px 0;
+  }
+  #faq { margin-top: 8px; padding-top: 12px; }
 
   /* FAQ accordion */
   .faq-item {
@@ -262,22 +294,30 @@
     <p style="color:var(--text-muted); max-width:65ch;">We help small business owners and solopreneurs cut hours of repetitive work using simple, no-code AI automation — without hiring a developer. Every playbook is tested, practical, and written in plain English.</p>
     <div class="about-grid">
       <div class="about-item">
-        <span class="icon">⏱️</span>
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"></circle><path d="M12 9v4l3 2"></path><path d="M9 2h6"></path></svg>
+        </span>
         <h3>Save hours weekly</h3>
         <p>Automate invoicing, scheduling, follow-ups and more.</p>
       </div>
       <div class="about-item">
-        <span class="icon">🧩</span>
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3a2 2 0 0 1 4 0v1.2a1 1 0 0 0 1.5.87l1.04-.6a2 2 0 0 1 2.73.73l0 .01a2 2 0 0 1-.73 2.73l-1.04.6a1 1 0 0 0 0 1.72l1.04.6a2 2 0 0 1 .73 2.73 2 2 0 0 1-2.73.73l-1.04-.6a1 1 0 0 0-1.5.86V16a2 2 0 0 1-4 0v-1.2a1 1 0 0 0-1.5-.87l-1.04.6a2 2 0 0 1-2.73-.73 2 2 0 0 1 .73-2.73l1.04-.6a1 1 0 0 0 0-1.72l-1.04-.6a2 2 0 0 1-.73-2.73 2 2 0 0 1 2.73-.73l1.04.6A1 1 0 0 0 10 4.2Z"></path></svg>
+        </span>
         <h3>No-code tools</h3>
         <p>Simple AI &amp; automation tools anyone can set up.</p>
       </div>
       <div class="about-item">
-        <span class="icon">📋</span>
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"></rect><path d="M9 2.5h6v3H9z"></path><path d="M8 11h8M8 14.5h8M8 18h5"></path></svg>
+        </span>
         <h3>Real playbooks</h3>
         <p>Step-by-step guides, not vague theory.</p>
       </div>
       <div class="about-item">
-        <span class="icon">🤝</span>
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="3.5"></circle><path d="m5.5 5.5 3.3 3.3M18.5 5.5l-3.3 3.3M5.5 18.5l3.3-3.3M18.5 18.5l-3.3-3.3"></path></svg>
+        </span>
         <h3>Done-for-you help</h3>
         <p>Request a custom automation build when you're stuck.</p>
       </div>
@@ -287,7 +327,7 @@
   <section id="pricing">
     <span class="subsection-label">Pricing</span>
     <h2 class="section-title">Simple pricing</h2>
-    <p style="color:var(--text-muted); max-width:65ch;">Two ways to get involved — a free weekly tip, or the $9 one-time Go Deeper tier below.</p>
+    <p style="color:var(--text-muted); max-width:65ch;">Two ways to get involved — a free weekly tip, or go deeper with the $9 one-time Pro tier and unlock full playbooks, prompt packs, and a monthly automation request.</p>
     <div class="pricing-grid">
       <div class="pricing-card">
         <h3>Starter</h3>
@@ -300,17 +340,29 @@
       </div>
       <div class="pricing-card featured">
         <span class="badge">Most popular</span>
-        <h3>Pro</h3>
+        <h3>Pro — Go Deeper</h3>
         <span class="price"><strong style="font-size:1.8rem;">$9</strong> <small>one-time</small></span>
         <ul>
           <li>Everything in Starter</li>
-          <li>Full step-by-step playbooks, twice a week</li>
-          <li>Ready-to-copy AI prompt packs</li>
-          <li>One "automate this for me" request/month</li>
+          <li>Full step-by-step playbooks, twice a week (tools, prompts, screenshots)</li>
+          <li>Ready-to-copy AI prompt packs for your industry</li>
+          <li>One "automate this for me" request per month</li>
         </ul>
+        <form class="pay-form" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+          <input type="hidden" name="cmd" value="_xclick">
+          <input type="hidden" name="business" value="skatermike219@gmail.com">
+          <input type="hidden" name="item_name" value="Kestrel Newsletter - Go Deeper Support">
+          <input type="hidden" name="amount" value="9.00">
+          <input type="hidden" name="currency_code" value="USD">
+          <input type="hidden" name="no_shipping" value="1">
+          <button type="submit">$9 Go Deeper</button>
+        </form>
+        <p class="founder-note">Founder pricing — one-time support payment via PayPal.</p>
       </div>
     </div>
   </section>
+
+  <hr class="section-divider">
 
   <section id="faq">
     <span class="subsection-label">FAQ</span>
@@ -366,24 +418,7 @@
       <p class="note">We never share your email. Unsubscribe anytime.</p>
     </div>
 
-    <div class="card">
-      <h2>Go deeper — <span class="price">$9</span></h2>
-      <ul>
-        <li>Full step-by-step playbooks, twice a week (tools, prompts, screenshots)</li>
-        <li>Ready-to-copy AI prompt packs for your industry</li>
-        <li>One "automate this for me" request per month</li>
-      </ul>
-      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" style="display:inline;">
-        <input type="hidden" name="cmd" value="_xclick">
-        <input type="hidden" name="business" value="skatermike219@gmail.com">
-        <input type="hidden" name="item_name" value="Kestrel Newsletter - Go Deeper Support">
-        <input type="hidden" name="amount" value="9.00">
-        <input type="hidden" name="currency_code" value="USD">
-        <input type="hidden" name="no_shipping" value="1">
-        <button type="submit">$9 Go Deeper</button>
-      </form>
-      <p class="note">Founder pricing — one-time support payment via PayPal.</p>
-    </div>
+    <p style="color:var(--text-muted); max-width:65ch;">Want the full playbooks and prompt packs? See the <a href="#pricing" style="color:var(--accent-light);">Pro / Go Deeper tier</a> in Pricing above.</p>
   </section>
 
   <footer class="site-footer">
