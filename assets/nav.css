@@ -6,6 +6,9 @@ header.site-header {
   position: sticky;
   top: 0;
   z-index: 100;
+  /* isolate() gives the header its own stacking context so its z-index
+     can never bleed into/over content further down the page (e.g. cards). */
+  isolation: isolate;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -20,7 +23,7 @@ header.site-header {
 }
 
 .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-.brand img { display: block; height: 40px; width: auto; filter: drop-shadow(0 1px 3px rgba(0,0,0,0.5)); }
+.brand img { display: block; position: static; height: 40px; width: auto; filter: drop-shadow(0 1px 3px rgba(0,0,0,0.5)); }
 .brand-name { font-weight: 700; font-size: 1.05rem; color: #eef1f5; }
 .brand-name span { color: #4f8cff; }
 
@@ -63,17 +66,19 @@ nav.site-nav a.active { color: #4f8cff; }
 .nav-toggle[aria-expanded="true"] span::before { transform: translateY(6px) rotate(45deg); }
 .nav-toggle[aria-expanded="true"] span::after { transform: translateY(-6px) rotate(-45deg); }
 
-/* Shared footer */
+/* Shared footer.
+   margin-top/padding-top follow the site's 24/32/48 spacing scale
+   (see .wrap padding) rather than the previous off-scale 40px gap. */
 footer.site-footer {
   text-align: center;
   color: #7a828f;
   font-size: 0.8rem;
-  margin-top: 40px;
+  margin-top: 32px;
   padding-top: 24px;
   border-top: 1px solid #2a2f3a;
 }
 footer.site-footer .footer-brand { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 12px; }
-footer.site-footer .footer-brand img { height: 22px; width: auto; }
+footer.site-footer .footer-brand img { height: 22px; width: auto; position: static; }
 footer.site-footer nav.footer-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 14px; }
 footer.site-footer a { color: #7a828f; text-decoration: none; }
 footer.site-footer a:hover { color: #4f8cff; }
