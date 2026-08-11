@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- site-version: 3 (nav/features/pricing/testimonials/faq/contact update) -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -31,6 +32,8 @@
     --shadow: 0 8px 24px rgba(0,0,0,0.35);
   }
 
+  html { scroll-behavior: smooth; }
+
   * { box-sizing: border-box; }
 
   body {
@@ -41,21 +44,31 @@
     line-height: 1.6;
   }
 
+  section[id] { scroll-margin-top: 90px; }
+
   .wrap { max-width: 760px; margin: 0 auto; padding: 32px 24px 48px; }
 
   /* Header / nav */
   header.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 8px 0 32px;
+    padding: 14px 0;
     flex-wrap: wrap;
     gap: 12px;
+    background: rgba(15,17,21,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 24px;
   }
   .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
   .brand img { display: block; height: 40px; width: auto; filter: drop-shadow(0 1px 3px rgba(0,0,0,0.5)); }
   .brand-name { font-weight: 700; font-size: 1.05rem; color: var(--text); }
   .brand-name span { color: var(--accent); }
+  nav.site-nav { display: flex; align-items: center; }
   nav.site-nav a {
     color: var(--text-muted);
     text-decoration: none;
@@ -65,6 +78,33 @@
     transition: color 0.15s ease;
   }
   nav.site-nav a:hover { color: var(--accent); }
+
+  /* Hamburger (mobile) */
+  .nav-toggle {
+    display: none;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 8px 10px;
+    cursor: pointer;
+  }
+  .nav-toggle span,
+  .nav-toggle span::before,
+  .nav-toggle span::after {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--text);
+    position: relative;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  .nav-toggle span::before,
+  .nav-toggle span::after { content: ""; position: absolute; }
+  .nav-toggle span::before { top: -6px; }
+  .nav-toggle span::after { top: 6px; }
+  .nav-toggle[aria-expanded="true"] span { background: transparent; }
+  .nav-toggle[aria-expanded="true"] span::before { transform: translateY(6px) rotate(45deg); }
+  .nav-toggle[aria-expanded="true"] span::after { transform: translateY(-6px) rotate(-45deg); }
 
   /* Hero */
   .hero { padding: 24px 0 40px; }
@@ -98,7 +138,7 @@
   }
   .about-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 16px;
     margin-top: 8px;
   }
@@ -160,12 +200,138 @@
   .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 4px; margin-bottom: 10px; }
   .footer-links .sep { color: #444b58; }
 
+  /* Feature icons */
+  .about-item .icon { font-size: 1.6rem; display: block; margin-bottom: 8px; }
+
+  /* Pricing */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 8px;
+  }
+  .pricing-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+  }
+  .pricing-card.featured { border-color: var(--accent); box-shadow: var(--shadow); }
+  .pricing-card h3 { margin: 0 0 6px; font-size: 1.1rem; }
+  .pricing-card .badge {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 3px 8px;
+    border-radius: 999px;
+    margin-bottom: 10px;
+  }
+  .pricing-card .price { display: block; margin: 6px 0 14px; }
+  .pricing-card .price small { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; }
+  .pricing-card ul { text-align: left; flex: 1; }
+  .pricing-card li { font-size: 0.9rem; }
+
+  /* Testimonials */
+  .testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 8px;
+  }
+  .testimonial-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 22px;
+  }
+  .testimonial-card p.quote { color: #d3d8e0; font-style: italic; margin: 0 0 14px; }
+  .testimonial-card .author { display: flex; align-items: center; gap: 10px; }
+  .testimonial-card .avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--accent); color: #fff; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; font-size: 0.9rem;
+  }
+  .testimonial-card .author-name { font-weight: 600; font-size: 0.9rem; color: var(--text); }
+  .testimonial-card .author-role { font-size: 0.8rem; color: var(--text-dim); }
+  .illustrative-note { font-size: 0.78rem; color: var(--text-dim); margin-top: 10px; font-style: italic; }
+
+  /* FAQ accordion */
+  .faq-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+  .faq-question {
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: none;
+    color: var(--text);
+    font-weight: 600;
+    font-size: 0.98rem;
+    padding: 16px 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: inherit;
+  }
+  .faq-question:hover { background: rgba(79,140,255,0.06); }
+  .faq-question .chevron { transition: transform 0.2s ease; color: var(--accent); font-size: 0.8rem; }
+  .faq-item.open .faq-question .chevron { transform: rotate(180deg); }
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease;
+  }
+  .faq-answer p { margin: 0; padding: 0 20px 16px; color: var(--text-muted); font-size: 0.9rem; }
+  .faq-item.open .faq-answer { max-height: 300px; }
+
+  .subsection-label {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--accent-light);
+    margin-bottom: 8px;
+  }
+
+  @media (max-width: 900px) {
+    .about-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
   @media (max-width: 640px) {
     h1 { font-size: 2rem; }
     .tag { font-size: 1.05rem; }
     .about-grid { grid-template-columns: 1fr; }
-    header.site-header { flex-direction: column; align-items: flex-start; }
-    nav.site-nav a { margin-left: 0; margin-right: 16px; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .testimonial-grid { grid-template-columns: 1fr; }
+    header.site-header { position: sticky; }
+    .nav-toggle { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; }
+    nav.site-nav {
+      display: none;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 8px 16px;
+      margin-top: 12px;
+    }
+    nav.site-nav.open { display: flex; }
+    nav.site-nav a { margin-left: 0; margin-right: 0; padding: 10px 0; width: 100%; border-bottom: 1px solid var(--border); }
+    nav.site-nav a:last-child { border-bottom: none; }
   }
 </style>
 </head>
@@ -173,17 +339,25 @@
 <div class="wrap">
 
   <header class="site-header">
-    <a href="index.html" class="brand">
-      <img src="assets/logo-mark.svg" alt="The Automation Edge logo" width="40" height="40">
+    <a href="#home" class="brand">
+      <img src="assets/logo-mark.svg?v=2" alt="The Automation Edge logo" width="40" height="40">
       <span class="brand-name">The Automation<span> Edge</span></span>
     </a>
-    <nav class="site-nav">
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="site-nav">
+      <span></span>
+    </button>
+    <nav class="site-nav" id="site-nav">
+      <a href="#home">Home</a>
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#faq">FAQ</a>
       <a href="blog/index.html">Blog</a>
-      <a href="#signup">Free Tips</a>
+      <a href="#contact">Contact</a>
     </nav>
   </header>
 
-  <section class="hero">
+  <section class="hero" id="home">
     <h1>Stop guessing. Start automating.</h1>
     <p class="tag">Twice-weekly, plain-English AI automation playbooks for small business owners — no coding, no fluff.</p>
     <div class="hero-ctas">
@@ -192,58 +366,187 @@
     </div>
   </section>
 
-  <section id="about">
+  <section id="features">
+    <span class="subsection-label">Features &amp; Services</span>
     <h2 class="section-title">What we do</h2>
     <p style="color:var(--text-muted); max-width:65ch;">We help small business owners and solopreneurs cut hours of repetitive work using simple, no-code AI automation — without hiring a developer. Every playbook is tested, practical, and written in plain English.</p>
     <div class="about-grid">
       <div class="about-item">
+        <span class="icon">⏱️</span>
         <h3>Save hours weekly</h3>
         <p>Automate invoicing, scheduling, follow-ups and more.</p>
       </div>
       <div class="about-item">
+        <span class="icon">🧩</span>
         <h3>No-code tools</h3>
         <p>Simple AI &amp; automation tools anyone can set up.</p>
       </div>
       <div class="about-item">
+        <span class="icon">📋</span>
         <h3>Real playbooks</h3>
         <p>Step-by-step guides, not vague theory.</p>
+      </div>
+      <div class="about-item">
+        <span class="icon">🤝</span>
+        <h3>Done-for-you help</h3>
+        <p>Request a custom automation build when you're stuck.</p>
       </div>
     </div>
   </section>
 
-  <div class="card" id="signup">
-    <h2>Free weekly tip</h2>
-    <p>One practical automation idea every week, straight to your inbox. No credit card needed.</p>
-    <form id="signup-form">
-      <input type="email" id="email" name="email" placeholder="you@yourbusiness.com" required>
-      <button type="submit">Get free tips</button>
-    </form>
-    <div id="status"></div>
-    <p class="note">We never share your email. Unsubscribe anytime.</p>
-  </div>
+  <section id="pricing">
+    <span class="subsection-label">Pricing</span>
+    <h2 class="section-title">Simple, illustrative pricing</h2>
+    <p style="color:var(--text-muted); max-width:65ch;">Placeholder tiers below are for illustration — our current live offer is the $9 Go Deeper support tier in the Contact section.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <h3>Starter</h3>
+        <span class="price"><strong style="font-size:1.8rem;">Free</strong></span>
+        <ul>
+          <li>Weekly automation tip email</li>
+          <li>Access to public blog playbooks</li>
+          <li>Community-tested tool list</li>
+        </ul>
+      </div>
+      <div class="pricing-card featured">
+        <span class="badge">Most popular</span>
+        <h3>Pro</h3>
+        <span class="price"><strong style="font-size:1.8rem;">$9</strong> <small>one-time</small></span>
+        <ul>
+          <li>Everything in Starter</li>
+          <li>Full step-by-step playbooks, twice a week</li>
+          <li>Ready-to-copy AI prompt packs</li>
+          <li>One "automate this for me" request/month</li>
+        </ul>
+      </div>
+      <div class="pricing-card">
+        <h3>Enterprise</h3>
+        <span class="price"><strong style="font-size:1.8rem;">Custom</strong></span>
+        <ul>
+          <li>Everything in Pro</li>
+          <li>Priority custom automation builds</li>
+          <li>Team onboarding &amp; training</li>
+        </ul>
+      </div>
+    </div>
+    <p class="illustrative-note">Enterprise tier is illustrative — contact us for a custom quote.</p>
+  </section>
 
-  <div class="card">
-    <h2>Go deeper — <span class="price">$9</span></h2>
-    <ul>
-      <li>Full step-by-step playbooks, twice a week (tools, prompts, screenshots)</li>
-      <li>Ready-to-copy AI prompt packs for your industry</li>
-      <li>One "automate this for me" request per month</li>
-    </ul>
-    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" style="display:inline;">
-      <input type="hidden" name="cmd" value="_xclick">
-      <input type="hidden" name="business" value="skatermike219@gmail.com">
-      <input type="hidden" name="item_name" value="Kestrel Newsletter - Go Deeper Support">
-      <input type="hidden" name="amount" value="9.00">
-      <input type="hidden" name="currency_code" value="USD">
-      <input type="hidden" name="no_shipping" value="1">
-      <button type="submit">$9 Go Deeper</button>
-    </form>
-    <p class="note">Founder pricing — one-time support payment via PayPal.</p>
-  </div>
+  <section id="testimonials">
+    <span class="subsection-label">Testimonials</span>
+    <h2 class="section-title">What readers say</h2>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <p class="quote">"Cut our invoicing time in half with one playbook. Wish I'd found this sooner."</p>
+        <div class="author">
+          <span class="avatar">J</span>
+          <div>
+            <div class="author-name">Jamie R.</div>
+            <div class="author-role">Freelance designer</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <p class="quote">"No jargon, just clear steps. Automated my client follow-ups in an afternoon."</p>
+        <div class="author">
+          <span class="avatar">S</span>
+          <div>
+            <div class="author-name">Sam T.</div>
+            <div class="author-role">Solo consultant</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <p class="quote">"The $9 tier paid for itself the first week. Great practical tips."</p>
+        <div class="author">
+          <span class="avatar">A</span>
+          <div>
+            <div class="author-name">Alex P.</div>
+            <div class="author-role">Small agency owner</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="illustrative-note">Names and quotes above are illustrative placeholders and do not represent real customer reviews.</p>
+  </section>
+
+  <section id="faq">
+    <span class="subsection-label">FAQ</span>
+    <h2 class="section-title">Frequently asked questions</h2>
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span>Do I need to know how to code?</span>
+        <span class="chevron">▾</span>
+      </button>
+      <div class="faq-answer"><p>No. Every playbook uses no-code or low-code tools with step-by-step instructions anyone can follow.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span>How often do I get new content?</span>
+        <span class="chevron">▾</span>
+      </button>
+      <div class="faq-answer"><p>Free subscribers get one tip a week. Go Deeper unlocks full playbooks twice a week.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span>Can I cancel or unsubscribe anytime?</span>
+        <span class="chevron">▾</span>
+      </button>
+      <div class="faq-answer"><p>Yes, every email includes an unsubscribe link and there's no lock-in — the Go Deeper tier is a one-time support payment, not a subscription.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span>What kind of businesses is this for?</span>
+        <span class="chevron">▾</span>
+      </button>
+      <div class="faq-answer"><p>Small business owners, freelancers, and solopreneurs who want to save time without hiring a developer.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span>What if I need a custom automation built?</span>
+        <span class="chevron">▾</span>
+      </button>
+      <div class="faq-answer"><p>Go Deeper members can send one "automate this for me" request per month, and Enterprise-level custom builds are available on request.</p></div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <span class="subsection-label">Contact &amp; Get Started</span>
+    <h2 class="section-title">Sign up or go deeper</h2>
+    <div class="card" id="signup">
+      <h2>Free weekly tip</h2>
+      <p>One practical automation idea every week, straight to your inbox. No credit card needed.</p>
+      <form id="signup-form">
+        <input type="email" id="email" name="email" placeholder="you@yourbusiness.com" required>
+        <button type="submit">Get free tips</button>
+      </form>
+      <div id="status"></div>
+      <p class="note">We never share your email. Unsubscribe anytime.</p>
+    </div>
+
+    <div class="card">
+      <h2>Go deeper — <span class="price">$9</span></h2>
+      <ul>
+        <li>Full step-by-step playbooks, twice a week (tools, prompts, screenshots)</li>
+        <li>Ready-to-copy AI prompt packs for your industry</li>
+        <li>One "automate this for me" request per month</li>
+      </ul>
+      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" style="display:inline;">
+        <input type="hidden" name="cmd" value="_xclick">
+        <input type="hidden" name="business" value="skatermike219@gmail.com">
+        <input type="hidden" name="item_name" value="Kestrel Newsletter - Go Deeper Support">
+        <input type="hidden" name="amount" value="9.00">
+        <input type="hidden" name="currency_code" value="USD">
+        <input type="hidden" name="no_shipping" value="1">
+        <button type="submit">$9 Go Deeper</button>
+      </form>
+      <p class="note">Founder pricing — one-time support payment via PayPal.</p>
+    </div>
+  </section>
 
   <footer class="site-footer">
     <div class="footer-brand">
-      <img src="assets/logo-mark.svg" alt="The Automation Edge logo" width="22" height="22">
+      <img src="assets/logo-mark.svg?v=2" alt="The Automation Edge logo" width="22" height="22">
       <span>The Automation Edge — a small, independent newsletter.</span>
     </div>
     <div class="footer-links">
@@ -258,6 +561,37 @@
 <script>
 const SUPABASE_URL = "https://gdqxktignefqfpanidob.supabase.co/rest/v1/subscribers";
 const SUPABASE_ANON_KEY = "sb_publishable_hmxRQdEMamY2hzqD1ZQZFw_5smTvW9a";
+
+// Mobile hamburger nav toggle
+const navToggle = document.getElementById('nav-toggle');
+const siteNav = document.getElementById('site-nav');
+navToggle.addEventListener('click', function () {
+  const isOpen = siteNav.classList.toggle('open');
+  navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+});
+// Close mobile menu after tapping a nav link (smooth scroll handled natively via CSS)
+siteNav.querySelectorAll('a').forEach(function (link) {
+  link.addEventListener('click', function () {
+    siteNav.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  });
+});
+
+// FAQ accordion (pure JS, no dependencies)
+document.querySelectorAll('.faq-item').forEach(function (item) {
+  const question = item.querySelector('.faq-question');
+  question.addEventListener('click', function () {
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(function (openItem) {
+      if (openItem !== item) {
+        openItem.classList.remove('open');
+        openItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+      }
+    });
+    item.classList.toggle('open', !isOpen);
+    question.setAttribute('aria-expanded', (!isOpen).toString());
+  });
+});
 
 document.getElementById('signup-form').addEventListener('submit', async function(e){
   e.preventDefault();
