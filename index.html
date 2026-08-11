@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- site-version: 3 (nav/features/pricing/testimonials/faq/contact update) -->
+<!-- site-version: 4 (removed fake testimonials/enterprise tier; honest solo-operator copy) -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -138,7 +138,7 @@
   /* Pricing */
   .pricing-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 16px;
     margin-top: 8px;
   }
@@ -169,30 +169,6 @@
   .pricing-card .price small { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; }
   .pricing-card ul { text-align: left; flex: 1; }
   .pricing-card li { font-size: 0.9rem; }
-
-  /* Testimonials */
-  .testimonial-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin-top: 8px;
-  }
-  .testimonial-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 22px;
-  }
-  .testimonial-card p.quote { color: #d3d8e0; font-style: italic; margin: 0 0 14px; }
-  .testimonial-card .author { display: flex; align-items: center; gap: 10px; }
-  .testimonial-card .avatar {
-    width: 36px; height: 36px; border-radius: 50%;
-    background: var(--accent); color: #fff; font-weight: 700;
-    display: flex; align-items: center; justify-content: center; font-size: 0.9rem;
-  }
-  .testimonial-card .author-name { font-weight: 600; font-size: 0.9rem; color: var(--text); }
-  .testimonial-card .author-role { font-size: 0.8rem; color: var(--text-dim); }
-  .illustrative-note { font-size: 0.78rem; color: var(--text-dim); margin-top: 10px; font-style: italic; }
 
   /* FAQ accordion */
   .faq-item {
@@ -247,7 +223,6 @@
     .tag { font-size: 1.05rem; }
     .about-grid { grid-template-columns: 1fr; }
     .pricing-grid { grid-template-columns: 1fr; }
-    .testimonial-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -266,7 +241,6 @@
       <a href="#home" class="active" aria-current="page">Home</a>
       <a href="#features">Features</a>
       <a href="#pricing">Pricing</a>
-      <a href="#testimonials">Testimonials</a>
       <a href="#faq">FAQ</a>
       <a href="blog/index.html">Blog</a>
       <a href="#contact">Contact</a>
@@ -312,8 +286,8 @@
 
   <section id="pricing">
     <span class="subsection-label">Pricing</span>
-    <h2 class="section-title">Simple, illustrative pricing</h2>
-    <p style="color:var(--text-muted); max-width:65ch;">Placeholder tiers below are for illustration — our current live offer is the $9 Go Deeper support tier in the Contact section.</p>
+    <h2 class="section-title">Simple pricing</h2>
+    <p style="color:var(--text-muted); max-width:65ch;">Two ways to get involved — a free weekly tip, or the $9 one-time Go Deeper tier below.</p>
     <div class="pricing-grid">
       <div class="pricing-card">
         <h3>Starter</h3>
@@ -335,55 +309,7 @@
           <li>One "automate this for me" request/month</li>
         </ul>
       </div>
-      <div class="pricing-card">
-        <h3>Enterprise</h3>
-        <span class="price"><strong style="font-size:1.8rem;">Custom</strong></span>
-        <ul>
-          <li>Everything in Pro</li>
-          <li>Priority custom automation builds</li>
-          <li>Team onboarding &amp; training</li>
-        </ul>
-      </div>
     </div>
-    <p class="illustrative-note">Enterprise tier is illustrative — contact us for a custom quote.</p>
-  </section>
-
-  <section id="testimonials">
-    <span class="subsection-label">Testimonials</span>
-    <h2 class="section-title">What readers say</h2>
-    <div class="testimonial-grid">
-      <div class="testimonial-card">
-        <p class="quote">"Cut our invoicing time in half with one playbook. Wish I'd found this sooner."</p>
-        <div class="author">
-          <span class="avatar">J</span>
-          <div>
-            <div class="author-name">Jamie R.</div>
-            <div class="author-role">Freelance designer</div>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial-card">
-        <p class="quote">"No jargon, just clear steps. Automated my client follow-ups in an afternoon."</p>
-        <div class="author">
-          <span class="avatar">S</span>
-          <div>
-            <div class="author-name">Sam T.</div>
-            <div class="author-role">Solo consultant</div>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial-card">
-        <p class="quote">"The $9 tier paid for itself the first week. Great practical tips."</p>
-        <div class="author">
-          <span class="avatar">A</span>
-          <div>
-            <div class="author-name">Alex P.</div>
-            <div class="author-role">Small agency owner</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <p class="illustrative-note">Names and quotes above are illustrative placeholders and do not represent real customer reviews.</p>
   </section>
 
   <section id="faq">
@@ -422,7 +348,7 @@
         <span>What if I need a custom automation built?</span>
         <span class="chevron">▾</span>
       </button>
-      <div class="faq-answer"><p>Go Deeper members can send one "automate this for me" request per month, and Enterprise-level custom builds are available on request.</p></div>
+      <div class="faq-answer"><p>Go Deeper members can send one "automate this for me" request per month. For anything bigger, reach out via the contact section and we'll see if it's a fit.</p></div>
     </div>
   </section>
 
