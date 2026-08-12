@@ -2,6 +2,26 @@ const SUPABASE_URL = "https://gdqxktignefqfpanidob.supabase.co/rest/v1/subscribe
 const SUPABASE_ANON_KEY = "sb_publishable_hmxRQdEMamY2hzqD1ZQZFw_5smTvW9a";
 
 
+// Scroll-reveal for feature/pricing cards (pure JS, no dependencies).
+// Respects prefers-reduced-motion by leaving .reveal elements visible via CSS fallback.
+if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const revealObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(function (el) {
+    revealObserver.observe(el);
+  });
+} else {
+  document.querySelectorAll('.reveal').forEach(function (el) {
+    el.classList.add('is-visible');
+  });
+}
+
 // FAQ accordion (pure JS, no dependencies)
 document.querySelectorAll('.faq-item').forEach(function (item) {
   const question = item.querySelector('.faq-question');

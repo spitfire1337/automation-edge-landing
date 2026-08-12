@@ -20,22 +20,27 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@700;800&display=swap" rel="stylesheet"></noscript>
 <link rel="preload" href="assets/nav.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="assets/nav.css"></noscript>
 
 <style>
   :root {
-    --bg: #0f1115;
-    --bg-card: #171a21;
-    --border: #2a2f3a;
+    --bg: #0A0E17;
+    --bg-alt: #10151F;
+    --bg-card: #131826;
+    --border: rgba(255,255,255,0.12);
     --text: #eef1f5;
     --text-muted: #9aa4b2;
     --text-dim: #7a828f;
-    --accent: #4f8cff;
-    --accent-hover: #3d78e6;
-    --accent-light: #7fb0ff;
+    --lime: #B4FF39;
+    --lime-hover: #9fe62e;
+    --amber: #FF7A29;
+    --amber-hover: #e8691f;
+    --accent: var(--lime);
+    --accent-hover: var(--lime-hover);
+    --accent-light: #cdfb7e;
     --radius-lg: 16px;
     --radius-md: 10px;
     --shadow: 0 8px 24px rgba(0,0,0,0.35);
@@ -53,34 +58,103 @@
     line-height: 1.6;
   }
 
+  h1, h2, h3, .brand-name, .price, .pricing-card h3 {
+    font-family: 'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
   section[id] { scroll-margin-top: 90px; }
 
-  .wrap { max-width: 760px; margin: 0 auto; padding: 32px 24px 48px; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px 48px; position: relative; }
+
+  /* Full-bleed alternating section backgrounds, independent of the
+     narrow centered .wrap container width. */
+  .band { position: relative; padding: 44px 0; margin: 0 0 4px; }
+  .band::before {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
+    background: var(--bg-alt);
+    z-index: -1;
+  }
+  .band > * { position: relative; z-index: 1; }
 
   /* Header / nav styles shared across the site live in assets/nav.css */
 
   /* Hero */
-  .hero { padding: 24px 0 40px; }
-  h1 { font-size: 2.6rem; line-height: 1.15; margin: 0 0 16px; font-weight: 800; letter-spacing: -0.02em; }
-  .tag { color: var(--text-muted); font-size: 1.2rem; margin: 0 0 28px; max-width: 60ch; }
-  .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+  .hero {
+    position: relative;
+    padding: 56px 0 56px;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: -120px;
+    right: -80px;
+    width: 640px;
+    height: 640px;
+    background:
+      radial-gradient(circle at 60% 40%, rgba(180,255,57,0.16), transparent 60%),
+      radial-gradient(circle at 30% 70%, rgba(255,122,41,0.13), transparent 55%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .hero-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 32px; align-items: center; }
+  .hero-graphic { position: relative; z-index: 1; }
+  .hero-graphic svg { width: 100%; height: auto; display: block; }
+  h1 {
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    line-height: 1.05;
+    margin: 0 0 18px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+  }
+  .grad-text {
+    background: linear-gradient(90deg, var(--lime), var(--amber));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: var(--lime);
+  }
+  .tag { color: var(--text-muted); font-size: 1.2rem; margin: 0 0 24px; max-width: 60ch; }
+  .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .trust-line {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+  }
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    white-space: nowrap;
+  }
+  .trust-item svg { flex-shrink: 0; width: 14px; height: 14px; color: var(--lime); }
   .btn-link {
     display: inline-block;
     padding: 12px 22px;
     border-radius: var(--radius-md);
-    font-weight: 600;
+    font-weight: 700;
     text-decoration: none;
     font-size: 0.95rem;
-    transition: background 0.15s ease, transform 0.1s ease;
+    transition: background 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
   }
-  .btn-primary { background: var(--accent); color: #fff; }
-  .btn-primary:hover { background: var(--accent-hover); }
+  .btn-primary { background: var(--lime); color: #0A0E17; }
+  .btn-primary:hover { background: var(--lime-hover); transform: translateY(-2px); }
   .btn-secondary { background: transparent; color: var(--text-muted); border: 1px solid var(--border); }
-  .btn-secondary:hover { color: var(--text); border-color: var(--accent); }
+  .btn-secondary:hover { color: var(--text); border-color: var(--amber); transform: translateY(-2px); }
 
   /* Sections & cards */
   section { margin-bottom: 28px; }
-  .section-title { font-size: 1.5rem; font-weight: 700; margin: 0 0 14px; }
+  .section-title { font-size: clamp(1.5rem, 3vw, 1.9rem); font-weight: 800; margin: 0 0 14px; letter-spacing: -0.01em; }
   .card {
     background: var(--bg-card);
     border: 1px solid var(--border);
@@ -100,8 +174,11 @@
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
     padding: 18px;
+    box-shadow: var(--shadow);
+    transition: transform 0.18s ease, border-color 0.18s ease;
   }
-  .about-item h3 { margin: 0 0 6px; font-size: 1rem; color: var(--accent-light); }
+  .about-item:hover { transform: translateY(-4px); border-color: var(--lime); }
+  .about-item h3 { margin: 0 0 6px; font-size: 1rem; color: var(--text); }
   .about-item p { margin: 0; color: var(--text-muted); font-size: 0.9rem; }
 
   ul { padding-left: 20px; margin: 12px 0; }
@@ -119,23 +196,23 @@
     font-size: 1rem;
     font-family: inherit;
   }
-  input[type=email]:focus { outline: none; border-color: var(--accent); }
+  input[type=email]:focus { outline: none; border-color: var(--lime); }
   button {
     padding: 14px 22px;
     border-radius: var(--radius-md);
     border: none;
-    background: var(--accent);
-    color: white;
-    font-weight: 600;
+    background: var(--lime);
+    color: #0A0E17;
+    font-weight: 700;
     font-size: 1rem;
     cursor: pointer;
     font-family: inherit;
-    transition: background 0.15s ease;
+    transition: background 0.15s ease, transform 0.15s ease;
   }
-  button:hover { background: var(--accent-hover); }
+  button:hover { background: var(--lime-hover); transform: translateY(-2px); }
 
   .note { font-size: 0.85rem; color: var(--text-dim); margin-top: 10px; }
-  .price { font-size: 1.6rem; font-weight: 700; color: var(--accent); }
+  .price { font-size: 1.6rem; font-weight: 800; color: var(--lime); }
   #status { margin-top: 12px; font-size: 0.95rem; min-height: 1.2em; }
 
   /* Footer styles shared across the site live in assets/nav.css */
@@ -148,7 +225,7 @@
     width: 36px;
     height: 36px;
     margin-bottom: 10px;
-    color: var(--accent-light);
+    color: var(--amber);
   }
   .about-item .icon svg { width: 100%; height: 100%; }
 
@@ -175,13 +252,17 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    box-shadow: var(--shadow);
+    transition: transform 0.18s ease, border-color 0.18s ease;
   }
-  .pricing-card.featured { border-color: var(--accent); box-shadow: var(--shadow); }
+  .pricing-card:hover { transform: translateY(-4px); border-color: var(--amber); }
+  .pricing-card.featured { border-color: var(--lime); box-shadow: 0 8px 32px rgba(180,255,57,0.12); }
+  .pricing-card.featured:hover { border-color: var(--lime); }
   .pricing-card h3 { margin: 0 0 6px; font-size: 1.1rem; }
   .pricing-card .badge {
     display: inline-block;
-    background: var(--accent);
-    color: #fff;
+    background: var(--amber);
+    color: #0A0E17;
     font-size: 0.7rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -201,6 +282,14 @@
     font-size: 0.95rem;
   }
   .pricing-card .founder-note { font-size: 0.8rem; color: var(--text-dim); margin-top: 10px; text-align: center; }
+
+  .pricing-trust {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 20px;
+    margin-top: 18px;
+  }
+  .pricing-trust .trust-item { font-size: 0.85rem; }
 
   /* Section divider between Pricing and FAQ so they don't visually blend */
   .section-divider {
@@ -233,8 +322,8 @@
     align-items: center;
     font-family: inherit;
   }
-  .faq-question:hover { background: rgba(79,140,255,0.06); }
-  .faq-question .chevron { transition: transform 0.2s ease; color: var(--accent); font-size: 0.8rem; }
+  .faq-question:hover { background: rgba(180,255,57,0.06); }
+  .faq-question .chevron { transition: transform 0.2s ease; color: var(--lime); font-size: 0.8rem; }
   .faq-item.open .faq-question .chevron { transform: rotate(180deg); }
   .faq-answer {
     max-height: 0;
@@ -250,19 +339,28 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: var(--accent-light);
+    color: var(--amber);
     margin-bottom: 8px;
+  }
+
+  /* Scroll-reveal (see assets/homepage.js); no-JS / reduced-motion always visible */
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
   }
 
   @media (max-width: 900px) {
     .about-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-graphic { max-width: 420px; margin: 0 auto; }
   }
 
   @media (max-width: 640px) {
-    h1 { font-size: 2rem; }
     .tag { font-size: 1.05rem; }
     .about-grid { grid-template-columns: 1fr; }
     .pricing-grid { grid-template-columns: 1fr; }
+    .band { padding: 32px 0; }
   }
 </style>
 <link rel="canonical" href="https://automation-edge.net/">
@@ -299,41 +397,83 @@
   </header>
 
   <section class="hero" id="home">
-    <h1>Stop guessing. Start automating.</h1>
-    <p class="tag">Twice-weekly, plain-English AI automation playbooks for small business owners — no coding, no fluff.</p>
-    <div class="hero-ctas">
-      <a href="#signup" class="btn-link btn-primary">Get free tips</a>
-      <a href="blog/index.html" class="btn-link btn-secondary">Read the blog</a>
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <h1>Stop guessing. <span class="grad-text">Start automating.</span></h1>
+        <p class="tag">Twice-weekly, plain-English AI automation playbooks for small business owners — real setup steps, exact tools, and screenshots. No coding, no fluff, no filler.</p>
+        <div class="hero-ctas">
+          <a href="#signup" class="btn-link btn-primary">Get free tips</a>
+          <a href="blog/index.html" class="btn-link btn-secondary">Read the blog</a>
+        </div>
+        <div class="trust-line">
+          <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>Instant digital delivery</span>
+          <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>Lifetime access</span>
+          <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>One-time payment, no subscription</span>
+        </div>
+      </div>
+      <div class="hero-graphic" aria-hidden="true">
+        <svg viewBox="0 0 400 380" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#B4FF39"></stop>
+              <stop offset="100%" stop-color="#FF7A29"></stop>
+            </linearGradient>
+          </defs>
+          <g fill="none" stroke="url(#lineGrad)" stroke-width="1.5" stroke-opacity="0.55">
+            <path d="M60 70 L170 40 L300 90"></path>
+            <path d="M170 40 L190 170"></path>
+            <path d="M300 90 L330 210"></path>
+            <path d="M60 70 L50 200"></path>
+            <path d="M50 200 L190 170"></path>
+            <path d="M190 170 L330 210"></path>
+            <path d="M50 200 L120 320"></path>
+            <path d="M190 170 L220 320"></path>
+            <path d="M330 210 L300 330"></path>
+            <path d="M120 320 L220 320 L300 330"></path>
+          </g>
+          <g>
+            <circle cx="60" cy="70" r="9" fill="#0A0E17" stroke="#B4FF39" stroke-width="2"></circle>
+            <circle cx="170" cy="40" r="6" fill="#B4FF39"></circle>
+            <circle cx="300" cy="90" r="9" fill="#0A0E17" stroke="#FF7A29" stroke-width="2"></circle>
+            <circle cx="50" cy="200" r="6" fill="#FF7A29"></circle>
+            <circle cx="190" cy="170" r="11" fill="#0A0E17" stroke="#B4FF39" stroke-width="2.5"></circle>
+            <circle cx="330" cy="210" r="6" fill="#B4FF39"></circle>
+            <circle cx="120" cy="320" r="9" fill="#0A0E17" stroke="#FF7A29" stroke-width="2"></circle>
+            <circle cx="220" cy="320" r="6" fill="#B4FF39"></circle>
+            <circle cx="300" cy="330" r="9" fill="#0A0E17" stroke="#FF7A29" stroke-width="2"></circle>
+          </g>
+        </svg>
+      </div>
     </div>
   </section>
 
-  <section id="features">
+  <section id="features" class="band">
     <span class="subsection-label">Features &amp; Services</span>
     <h2 class="section-title">What we do</h2>
-    <p style="color:var(--text-muted); max-width:65ch;">We help small business owners and solopreneurs cut hours of repetitive work using simple, no-code AI automation — without hiring a developer. Every playbook is tested, practical, and written in plain English.</p>
+    <p style="color:var(--text-muted); max-width:65ch;">We help small business owners and solopreneurs cut hours of repetitive work every week using simple, no-code AI automation — without hiring a developer. Every playbook is tested on a real business first, then written in plain English.</p>
     <div class="about-grid">
-      <div class="about-item">
+      <div class="about-item reveal">
         <span class="icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"></circle><path d="M12 9v4l3 2"></path><path d="M9 2h6"></path></svg>
         </span>
         <h3>Save hours weekly</h3>
         <p>Automate invoicing, scheduling, follow-ups and more.</p>
       </div>
-      <div class="about-item">
+      <div class="about-item reveal">
         <span class="icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3a2 2 0 0 1 4 0v1.2a1 1 0 0 0 1.5.87l1.04-.6a2 2 0 0 1 2.73.73l0 .01a2 2 0 0 1-.73 2.73l-1.04.6a1 1 0 0 0 0 1.72l1.04.6a2 2 0 0 1 .73 2.73 2 2 0 0 1-2.73.73l-1.04-.6a1 1 0 0 0-1.5.86V16a2 2 0 0 1-4 0v-1.2a1 1 0 0 0-1.5-.87l-1.04.6a2 2 0 0 1-2.73-.73 2 2 0 0 1 .73-2.73l1.04-.6a1 1 0 0 0 0-1.72l-1.04-.6a2 2 0 0 1-.73-2.73 2 2 0 0 1 2.73-.73l1.04.6A1 1 0 0 0 10 4.2Z"></path></svg>
         </span>
         <h3>No-code tools</h3>
         <p>Simple AI &amp; automation tools anyone can set up.</p>
       </div>
-      <div class="about-item">
+      <div class="about-item reveal">
         <span class="icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"></rect><path d="M9 2.5h6v3H9z"></path><path d="M8 11h8M8 14.5h8M8 18h5"></path></svg>
         </span>
         <h3>Real playbooks</h3>
         <p>Step-by-step guides, not vague theory.</p>
       </div>
-      <div class="about-item">
+      <div class="about-item reveal">
         <span class="icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="3.5"></circle><path d="m5.5 5.5 3.3 3.3M18.5 5.5l-3.3 3.3M5.5 18.5l3.3-3.3M18.5 18.5l-3.3-3.3"></path></svg>
         </span>
@@ -346,9 +486,9 @@
   <section id="products">
     <span class="subsection-label">Digital Products</span>
     <h2 class="section-title">Buy once, use forever</h2>
-    <p style="color:var(--text-muted); max-width:65ch;">No subscriptions — just one-time digital products you own and can use immediately.</p>
+    <p style="color:var(--text-muted); max-width:65ch;">No subscriptions, no recurring fees — just one-time digital products you own and can put to work in the next 10 minutes.</p>
     <div class="pricing-grid">
-      <div class="pricing-card">
+      <div class="pricing-card reveal">
         <h3>Notion Productivity &amp; Client Management Template Pack</h3>
         <span class="price"><strong style="font-size:1.8rem;">$19</strong> <small>one-time</small></span>
         <ul>
@@ -359,7 +499,7 @@
         </ul>
         <a class="btn-link btn-primary pay-form" style="width:100%; text-align:center;" href="https://buy.stripe.com/28E14mgEubNm3ey22l1kA00" target="_blank" rel="noopener">Buy Now — $19</a>
       </div>
-      <div class="pricing-card">
+      <div class="pricing-card reveal">
         <h3>Automation Starter Kit</h3>
         <span class="price"><strong style="font-size:1.8rem;">$29</strong> <small>one-time</small></span>
         <ul>
@@ -371,14 +511,19 @@
         <a class="btn-link btn-primary pay-form" style="width:100%; text-align:center;" href="https://buy.stripe.com/9B69AS5ZQ18I5mG36p1kA01" target="_blank" rel="noopener">Buy Now — $29</a>
       </div>
     </div>
+    <div class="pricing-trust">
+      <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>Instant digital delivery</span>
+      <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>Lifetime access, no expiry</span>
+      <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>Secure checkout via Stripe</span>
+    </div>
   </section>
 
-  <section id="pricing">
+  <section id="pricing" class="band">
     <span class="subsection-label">Pricing</span>
     <h2 class="section-title">Simple pricing</h2>
-    <p style="color:var(--text-muted); max-width:65ch;">Two ways to get involved — a free weekly tip, or go deeper with the $9 one-time Pro tier and unlock full playbooks, prompt packs, and a monthly automation request.</p>
+    <p style="color:var(--text-muted); max-width:65ch;">Two ways in — a free weekly tip, or go deeper with the $9 one-time Pro tier for full twice-weekly playbooks, ready-to-copy prompt packs, and a monthly automation request.</p>
     <div class="pricing-grid">
-      <div class="pricing-card">
+      <div class="pricing-card reveal">
         <h3>Starter</h3>
         <span class="price"><strong style="font-size:1.8rem;">Free</strong></span>
         <ul>
@@ -387,7 +532,7 @@
           <li>Community-tested tool list</li>
         </ul>
       </div>
-      <div class="pricing-card featured">
+      <div class="pricing-card featured reveal">
         <span class="badge">Most popular</span>
         <h3>Pro — Go Deeper</h3>
         <span class="price"><strong style="font-size:1.8rem;">$9</strong> <small>one-time</small></span>
@@ -408,6 +553,11 @@
         </form>
         <p class="founder-note">Founder pricing — one-time support payment via PayPal.</p>
       </div>
+    </div>
+    <div class="pricing-trust">
+      <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>One-time payment, no subscription</span>
+      <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>Secure checkout via Stripe/PayPal</span>
+      <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>Cancel anytime, no lock-in</span>
     </div>
   </section>
 
@@ -453,7 +603,7 @@
     </div>
   </section>
 
-  <section id="contact">
+  <section id="contact" class="band">
     <span class="subsection-label">Contact &amp; Get Started</span>
     <h2 class="section-title">Sign up or go deeper</h2>
     <div class="card" id="signup">
