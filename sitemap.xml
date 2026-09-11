@@ -1119,4 +1119,10 @@
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://automation-edge.net/blog/tanning-salon-appointment-booking-automation.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
