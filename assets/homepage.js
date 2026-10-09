@@ -22,6 +22,18 @@ if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-mot
   });
 }
 
+// Safety net: force-reveal anything still waiting on IntersectionObserver shortly after
+// load (covers slow scroll, bfcache restores, or environments where the observer never
+// fires). Cards are already visible via CSS (opacity:1 by default) - this just finishes
+// the slide-up transform so nothing is left mid-animation indefinitely.
+window.addEventListener('load', function () {
+  setTimeout(function () {
+    document.querySelectorAll('.reveal:not(.is-visible)').forEach(function (el) {
+      el.classList.add('is-visible');
+    });
+  }, 1500);
+});
+
 // FAQ accordion (pure JS, no dependencies)
 document.querySelectorAll('.faq-item').forEach(function (item) {
   const question = item.querySelector('.faq-question');

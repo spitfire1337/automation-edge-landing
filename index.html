@@ -343,8 +343,11 @@
     margin-bottom: 8px;
   }
 
-  /* Scroll-reveal (see assets/homepage.js); no-JS / reduced-motion always visible */
-  .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  /* Scroll-reveal (see assets/homepage.js); no-JS / reduced-motion always visible.
+     Content starts fully visible (opacity:1) so Buy Now buttons and pricing are never
+     hidden if IntersectionObserver never fires (e.g. screenshot tools, crawlers, or a
+     user who never scrolls the card into view) - only the slide-up transform animates. */
+  .reveal { opacity: 1; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
   .reveal.is-visible { opacity: 1; transform: translateY(0); }
   @media (prefers-reduced-motion: reduce) {
     .reveal { opacity: 1; transform: none; transition: none; }
@@ -500,15 +503,16 @@
         <a class="btn-link btn-primary pay-form" style="width:100%; text-align:center;" href="https://buy.stripe.com/28E14mgEubNm3ey22l1kA00" target="_blank" rel="noopener">Buy Now — $19</a>
       </div>
       <div class="pricing-card reveal">
+        <span class="badge">Limited-time price</span>
         <h3>Automation Starter Kit</h3>
-        <span class="price"><strong style="font-size:1.8rem;">$29</strong> <small>one-time</small></span>
+        <span class="price"><strong style="font-size:1.8rem;">$19</strong> <small>one-time <s style="color:var(--text-dim); font-weight:400;">$29</s></small></span>
         <ul>
           <li>Client onboarding automation pack (templates + script)</li>
           <li>Invoice &amp; payment reminder automator</li>
           <li>Data cleanup toolkit for CSV/Excel exports</li>
           <li>Step-by-step setup guide — running in under 15 minutes</li>
         </ul>
-        <a class="btn-link btn-primary pay-form" style="width:100%; text-align:center;" href="https://buy.stripe.com/9B69AS5ZQ18I5mG36p1kA01" target="_blank" rel="noopener">Buy Now — $29</a>
+        <a class="btn-link btn-primary pay-form" style="width:100%; text-align:center;" href="https://buy.stripe.com/14A28q87YdVug1k9uN1kA03" target="_blank" rel="noopener">Buy Now — $19</a>
       </div>
     </div>
     <div class="pricing-trust">
