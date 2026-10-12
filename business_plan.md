@@ -455,3 +455,13 @@ The 82 posts are not one flat cluster — they organize into roughly 9 duplicati
 **Recommendation (proposal only, not yet implemented):** build a hub-of-hubs internal linking structure next run — the primary generic pillar guide links out to one designated hub post per sub-cluster (~9 category hubs), and each category hub fans out to its vertical spoke posts within that niche. This is the same hub-and-spoke pattern applied to the client-intake cluster in e101178, scaled up one level to account for the larger, multi-cluster scope of the scheduling topic. Separately, flag the 4-post vehicle/mobile-detailing sub-cluster (auto-detailing, mobile-car-detailing, boat-detailing-dispatch, mobile-rv-detailing-winterization) as a near-duplicate set that may warrant content consolidation/merging in a future run, rather than linking alone, given how little differentiation exists between the posts beyond the vehicle type.
 
 No files have been modified in this task — this entry documents the analysis only; implementation (adding cross-links and evaluating the detailing-cluster merge) is deferred to a subsequent run, consistent with how the client-intake cluster proposal preceded its e101178 implementation commit.
+
+## Scheduling Cluster Analysis (read-only eval, 2026-10-12)
+
+**Scope:** 82 scheduling-related blog posts found in repo/blog/. 76/82 already have ad-hoc "Related Reading" cross-links within their own vertical niche; 6 have none.
+
+**Sub-clusters identified (~9):** vehicle detailing, life-safety compliance inspection, field-service dispatch, delivery/rental routes, seasonal exterior maintenance, cleaning, class/lesson instruction, medical/misc, plus 2 generic pillar guides.
+
+**Critical gap:** The two generic pillar guides (`how-small-businesses-can-automate-appointment-scheduling-without-expensive-software.html` and `scheduling-software-for-solo-consultants.html`) have ZERO inbound links from any niche post - mirrors the pre-fix state of the client-intake cluster (commit e101178).
+
+**Recommendation (PROPOSAL, not yet implemented):** Build a hub-of-hubs structure - primary generic guide links down to ~9 category-hub posts (reusing posts already acting informally as hubs), each fanning out to its vertical spokes. Flag the 4-post vehicle-detailing near-duplicate cluster as a future content-merge candidate, not just a linking fix. Full detail in /app/data/scheduling_cluster_analysis.md.
