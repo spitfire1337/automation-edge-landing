@@ -291,6 +291,32 @@
   }
   .pricing-trust .trust-item { font-size: 0.85rem; }
 
+  /* Social proof */
+  .proof-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .proof-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 18px;
+    box-shadow: var(--shadow);
+  }
+  .proof-item p { margin: 0; color: var(--text-muted); font-size: 0.9rem; }
+  .proof-item .proof-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--amber);
+    margin-bottom: 8px;
+  }
+  @media (max-width: 640px) { .proof-grid { grid-template-columns: 1fr; } }
+
   /* Section divider between Pricing and FAQ so they don't visually blend */
   .section-divider {
     border: none;
@@ -405,13 +431,15 @@
         <h1>Stop guessing. <span class="grad-text">Start automating.</span></h1>
         <p class="tag">Twice-weekly, plain-English AI automation playbooks for small business owners — real setup steps, exact tools, and screenshots. No coding, no fluff, no filler.</p>
         <div class="hero-ctas">
-          <a href="#signup" class="btn-link btn-primary">Get free tips</a>
+          <a href="#products" class="btn-link btn-primary">Get instant access — $19</a>
+          <a href="#signup" class="btn-link btn-secondary">Get free tips</a>
           <a href="blog/index.html" class="btn-link btn-secondary">Read the blog</a>
         </div>
         <div class="trust-line">
           <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>Instant digital delivery</span>
           <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>Lifetime access</span>
           <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>One-time payment, no subscription</span>
+          <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>Secure checkout via Stripe</span>
         </div>
       </div>
       <div class="hero-graphic" aria-hidden="true">
@@ -446,6 +474,26 @@
             <circle cx="300" cy="330" r="9" fill="#0A0E17" stroke="#FF7A29" stroke-width="2"></circle>
           </g>
         </svg>
+      </div>
+    </div>
+  </section>
+
+  <section id="social-proof" class="band">
+    <span class="subsection-label">Why people choose us</span>
+    <h2 class="section-title">Trusted by freelancers and small businesses</h2>
+    <p style="color:var(--text-muted); max-width:65ch;">We're a small, solo-run operation — join early adopters streamlining their workflow with plain-English, no-code automation.</p>
+    <div class="proof-grid">
+      <div class="proof-item reveal">
+        <span class="proof-label">Tested first</span>
+        <p>Every playbook is run on a real business before it's published — no recycled theory.</p>
+      </div>
+      <div class="proof-item reveal">
+        <span class="proof-label">No fluff</span>
+        <p>Plain-English, step-by-step instructions you can follow without hiring a developer.</p>
+      </div>
+      <div class="proof-item reveal">
+        <span class="proof-label">Own it outright</span>
+        <p>One-time digital products — no subscriptions, no recurring fees, no lock-in.</p>
       </div>
     </div>
   </section>
@@ -500,7 +548,7 @@
           <li>Task, project, and productivity dashboards</li>
           <li>Instant digital delivery, no setup required</li>
         </ul>
-        <a class="btn-link btn-primary pay-form" style="width:100%; text-align:center;" href="https://buy.stripe.com/28E14mgEubNm3ey22l1kA00" target="_blank" rel="noopener">Buy Now — $19</a>
+        <a class="btn-link btn-primary pay-form" style="width:100%; text-align:center;" href="https://buy.stripe.com/28E14mgEubNm3ey22l1kA00" target="_blank" rel="noopener">Get instant access — $19</a>
       </div>
       <div class="pricing-card reveal">
         <span class="badge">Limited-time price</span>
@@ -512,7 +560,7 @@
           <li>Data cleanup toolkit for CSV/Excel exports</li>
           <li>Step-by-step setup guide — running in under 15 minutes</li>
         </ul>
-        <a class="btn-link btn-primary pay-form" style="width:100%; text-align:center;" href="https://buy.stripe.com/14A28q87YdVug1k9uN1kA03" target="_blank" rel="noopener">Buy Now — $19</a>
+        <a class="btn-link btn-primary pay-form" style="width:100%; text-align:center;" href="https://buy.stripe.com/14A28q87YdVug1k9uN1kA03" target="_blank" rel="noopener">Get instant access — $19</a>
       </div>
     </div>
     <div class="pricing-trust">
