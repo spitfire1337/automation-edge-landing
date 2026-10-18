@@ -283,6 +283,47 @@
   }
   .pricing-card .founder-note { font-size: 0.8rem; color: var(--text-dim); margin-top: 10px; text-align: center; }
 
+  .mini-capture { margin-top: 10px; text-align: center; }
+  .mini-capture-toggle {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-decoration: underline;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .mini-capture-toggle:hover { color: var(--accent-light); }
+  .mini-capture-form {
+    display: none;
+    gap: 6px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .mini-capture-form.open { display: flex; }
+  .mini-capture-form input[type="email"] {
+    flex: 1 1 160px;
+    min-width: 0;
+    padding: 7px 10px;
+    font-size: 0.82rem;
+    border-radius: 6px;
+    border: 1px solid var(--border, #444);
+    background: var(--bg-alt, #1a1a1a);
+    color: inherit;
+  }
+  .mini-capture-form button {
+    padding: 7px 12px;
+    font-size: 0.82rem;
+    border-radius: 6px;
+    border: 1px solid var(--amber, #c9a14a);
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+  }
+  .mini-capture-status { font-size: 0.75rem; color: var(--text-dim); margin-top: 6px; min-height: 1em; }
+
   .pricing-trust {
     display: flex;
     flex-wrap: wrap;
@@ -553,6 +594,14 @@
         </ul>
         <p style="color:var(--text-dim); font-size:0.82rem; margin:0 0 4px;"><strong>What's included:</strong> 1 Notion template (duplicate-to-your-workspace link) + setup guide PDF</p>
         <a class="btn-link btn-primary pay-form" style="width:100%; text-align:center;" href="https://buy.stripe.com/28E14mgEubNm3ey22l1kA00" target="_blank" rel="noopener">Get instant access — $19</a>
+        <div class="mini-capture">
+          <button type="button" class="mini-capture-toggle" data-target="signup-form-card1">Not ready yet? Get a free preview + updates</button>
+          <form id="signup-form-card1" class="mini-capture-form">
+            <input type="email" id="email-card1" name="email" placeholder="you@yourbusiness.com" required>
+            <button type="submit">Get free tips</button>
+          </form>
+          <div id="status-card1" class="mini-capture-status"></div>
+        </div>
         <p class="founder-note">30-day money-back guarantee — no questions asked.</p>
       </div>
       <div class="pricing-card reveal">
@@ -569,6 +618,14 @@
         </ul>
         <p style="color:var(--text-dim); font-size:0.82rem; margin:0 0 4px;"><strong>What's included:</strong> PDF setup guide + editable templates (Google Docs/CSV) + automation script files (.json for Zapier/Make)</p>
         <a class="btn-link btn-primary pay-form" style="width:100%; text-align:center;" href="https://buy.stripe.com/14A28q87YdVug1k9uN1kA03" target="_blank" rel="noopener">Get instant access — $19</a>
+        <div class="mini-capture">
+          <button type="button" class="mini-capture-toggle" data-target="signup-form-card2">Not ready yet? Get a free preview + updates</button>
+          <form id="signup-form-card2" class="mini-capture-form">
+            <input type="email" id="email-card2" name="email" placeholder="you@yourbusiness.com" required>
+            <button type="submit">Get free tips</button>
+          </form>
+          <div id="status-card2" class="mini-capture-status"></div>
+        </div>
         <p class="founder-note">30-day money-back guarantee — no questions asked.</p>
       </div>
     </div>
@@ -599,6 +656,14 @@
         </ul>
         <p style="color:var(--text-dim); font-size:0.82rem; margin:0 0 4px;"><strong>What's included:</strong> 1 PDF setup guide + 1 editable template (Google Docs/CSV)</p>
         <a class="btn-link btn-primary pay-form" style="width:100%; text-align:center;" href="https://buy.stripe.com/8x214m4VMbNm02mayR1kA04" target="_blank" rel="noopener">Try it for $7</a>
+        <div class="mini-capture">
+          <button type="button" class="mini-capture-toggle" data-target="signup-form-card3">Not ready yet? Get a free preview + updates</button>
+          <form id="signup-form-card3" class="mini-capture-form">
+            <input type="email" id="email-card3" name="email" placeholder="you@yourbusiness.com" required>
+            <button type="submit">Get free tips</button>
+          </form>
+          <div id="status-card3" class="mini-capture-status"></div>
+        </div>
         <p class="founder-note">30-day money-back guarantee — no questions asked.</p>
       </div>
     </div>

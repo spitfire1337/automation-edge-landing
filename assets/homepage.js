@@ -50,10 +50,12 @@ document.querySelectorAll('.faq-item').forEach(function (item) {
   });
 });
 
-document.getElementById('signup-form').addEventListener('submit', async function(e){
+// Reusable email-capture submit handler shared by the main footer signup form
+// and the secondary mini-capture forms next to each pricing buy button.
+// All forms post to the same Supabase "subscribers" endpoint/tier.
+async function handleSignupSubmit(e, emailInputEl, statusEl, formEl) {
   e.preventDefault();
-  const email = document.getElementById('email').value.trim();
-  const statusEl = document.getElementById('status');
+  const email = emailInputEl.value.trim();
   statusEl.textContent = 'Submitting...';
   try {
     const res = await fetch(SUPABASE_URL, {
@@ -68,7 +70,7 @@ document.getElementById('signup-form').addEventListener('submit', async function
     });
     if (res.ok) {
       statusEl.textContent = "You're in! Check your inbox soon for your first automation tip.";
-      document.getElementById('signup-form').reset();
+      formEl.reset();
     } else {
       const txt = await res.text();
       if (txt.includes('duplicate') || res.status === 409) {
@@ -80,4 +82,35 @@ document.getElementById('signup-form').addEventListener('submit', async function
   } catch(err) {
     statusEl.textContent = 'Network error. Please try again.';
   }
+}
+
+// Wires up a signup form by id, given matching email input and status element ids.
+function initSignupForm(formId, emailId, statusId) {
+  const formEl = document.getElementById(formId);
+  if (!formEl) return;
+  const emailInputEl = document.getElementById(emailId);
+  const statusEl = document.getElementById(statusId);
+  formEl.addEventListener('submit', function (e) {
+    handleSignupSubmit(e, emailInputEl, statusEl, formEl);
+  });
+}
+
+initSignupForm('signup-form', 'email', 'status');
+initSignupForm('signup-form-card1', 'email-card1', 'status-card1');
+initSignupForm('signup-form-card2', 'email-card2', 'status-card2');
+initSignupForm('signup-form-card3', 'email-card3', 'status-card3');
+
+// Toggle buttons that reveal the small inline email capture form near each
+// pricing buy button, keeping the UI minimal until the user opts in.
+document.querySelectorAll('.mini-capture-toggle').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    const targetForm = document.getElementById(btn.getAttribute('data-target'));
+    if (!targetForm) return;
+    const willOpen = !targetForm.classList.contains('open');
+    targetForm.classList.toggle('open', willOpen);
+    if (willOpen) {
+      const input = targetForm.querySelector('input[type="email"]');
+      if (input) input.focus();
+    }
+  });
 });
